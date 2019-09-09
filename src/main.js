@@ -5,7 +5,9 @@ import router from '@/router/'
 import store from '@/store/';
 //import { sync } from 'vuex-router-sync';
 
-Vue.use(Vuetify);
+Vue.use(Vuetify,{
+  iconfont: 'mdi'
+});
 Vue.config.productionTip = false
 
 //sync(store, router);

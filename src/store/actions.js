@@ -7,5 +7,11 @@ export default {
     },
     clearSnackbar({commit}, payload) {
         commit("clearSnackbar", payload);
+    },
+    openProfileDialog({commit}) {
+        commit("openProfileDialog");
+    },
+    closeProfileDialog({commit}) {
+        commit("closeProfileDialog");
     }
 }

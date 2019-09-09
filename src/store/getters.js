@@ -4,5 +4,8 @@ export default {
     },
     getSnackbarMessage(state) {
         return state.snackbarMessage;
+    },
+    getProfileDialog(state) {
+        return state.profileDialog;
     }
 }

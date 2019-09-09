@@ -5,7 +5,7 @@
 
         <v-toolbar flat>
             <v-btn color="primary" dark :loading="loading" @click="fetchData"><v-icon left>refresh</v-icon> Refresh</v-btn>
-            <v-btn color="primary" dark><v-icon left>group_add</v-icon> New Team</v-btn>
+            <v-btn color="primary" dark @click="openDialog"><v-icon left>group_add</v-icon> New Team</v-btn>
         </v-toolbar>
 
         <v-data-table
@@ -126,7 +126,10 @@ export default {
         },
         edit(id) {
            console.log("edit", id);
-       }
+        },
+        openDialog() {
+            this.$store.dispatch('team/openTeamDialog');
+        }
     },
     watch: {
         pagination() {

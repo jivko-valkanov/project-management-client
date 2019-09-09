@@ -70,6 +70,7 @@
             </v-list>
         </v-menu>
         
+        <span>{{ getUsername }}</span>
     </v-toolbar>
 
     <v-content>
@@ -77,6 +78,8 @@
         <v-layout>
           <v-flex>
             <Snackbar/>
+            <ProfileDialog />
+            <TeamDialog />
             <v-fade-transition mode="out-in">
               <router-view></router-view>
             </v-fade-transition>
@@ -93,6 +96,8 @@
 import AuthenticationService from '@/services/AuthenticationService';
 import Footer from "@/components/Footer";
 import Snackbar from "@/components/Snackbar";
+import ProfileDialog from "@/components/ProfileDialog";
+import TeamDialog from "@/components/TeamDialog";
 
 export default {
   name: "Home",
@@ -114,21 +119,17 @@ export default {
   },
   components: {
     Footer,
-    Snackbar
+    Snackbar,
+    ProfileDialog,
+    TeamDialog
   },
   methods: {
-    makeANewTask() {
-      this.dialog = true;
-      this.$nextTick(() => {
-          this.$refs.focus.$refs.input.focus();
-      });    
-    },
     navigationTo(link) {
       this.$router.push(link)
     },
     menuItemsClick(index) {
       let option = this.items[index];
-      //const self = this;
+
       if(option.title.toLowerCase() === "logout") {
           AuthenticationService
           .logout(null)
@@ -153,7 +154,15 @@ export default {
           //   self.$router.push({ path: '/'});
           // });
       }
+      else if(option.title.toLowerCase() === "profile") {
+        this.$store.dispatch("openProfileDialog");
+      }
     },
+  },
+  computed: {
+    getUsername() {
+      return this.$store.getters['user/getUsername'];
+    }
   }
 };
 </script>

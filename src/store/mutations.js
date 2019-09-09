@@ -9,5 +9,11 @@ export default {
     clearSnackbar(state) {
         state.snackbarMessage = null
         state.snackbarAppear = false;
+    },
+    openProfileDialog(state) {
+        state.profileDialog = true;
+    },
+    closeProfileDialog(state) {
+        state.profileDialog = false;
     }
 }
