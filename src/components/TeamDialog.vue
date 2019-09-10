@@ -17,6 +17,30 @@
                         </v-btn>
                     </v-toolbar-items>
                 </v-toolbar>
+                <!-- container -->
+                <div grid-list-md text-xs-center>
+                    <v-layout row wrap>
+                        <v-flex xs12 lg5 pa-3>
+                            <v-card>
+                                <v-card-text class="primary white--text">
+                                    <h4 style="text-transform:uppercase;">{{ title }}</h4>
+                                </v-card-text>
+                                <v-card-text class="details-container">
+                                <v-layout row wrap>
+                                   
+                                </v-layout>
+                                </v-card-text>
+                            </v-card>
+                        </v-flex>
+                        <v-flex xs12 lg7 pa-3>
+                            <v-card class="children-tabs">
+                            <v-tabs color="primary" dark slider-color="primary">
+                                <slot></slot>
+                            </v-tabs>
+                            </v-card>
+                        </v-flex>
+                    </v-layout>
+                </div>
             </v-card>
         </v-dialog>
     </v-layout>
@@ -25,6 +49,11 @@
 <script>
 export default {
     name:'teamDialog',
+    data() {
+        return {
+            title: "basic information"
+        }
+    },
     methods: {
         onClose() {
             this.$store.dispatch('team/closeTeamDialog');

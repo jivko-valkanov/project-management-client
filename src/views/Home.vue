@@ -140,9 +140,8 @@ export default {
             console.log(error.message);
           })
           .then(() => {
-            this.$store.dispatch('setToken', null);
-            this.$store.dispatch('setUsername', null);
-            this.$store.dispatch('setIsLogin', false);
+            this.$store.dispatch('user/setToken', null);
+            this.$store.dispatch('user/setUsername', null);
             //redirect
             this.$router.push({ path: '/'});
           });
