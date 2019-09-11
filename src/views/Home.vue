@@ -1,25 +1,25 @@
 <template>
 <div>
     <v-navigation-drawer app fixed clipped v-model="drawer">
-            <v-list dense>
-                <v-list-tile
-                    v-for="item in menuItems"
-                    :key="item.title"
-                    :to="item.link"
-                    router
-                    class="pl-4"
-                    >
-                    <v-list-tile-action>
-                      <v-icon>{{ item.icon }}</v-icon>
-                    </v-list-tile-action>
+        <v-list dense>
+            <v-list-tile
+                v-for="item in menuItems"
+                :key="item.title"
+                :to="item.link"
+                router
+                class="pl-4"
+                >
+                <v-list-tile-action>
+                  <v-icon>{{ item.icon }}</v-icon>
+                </v-list-tile-action>
 
-                    <v-list-tile-content>
-                        <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                    </v-list-tile-content>
-                    
-                </v-list-tile>
-            </v-list>
-        </v-navigation-drawer>
+                <v-list-tile-content>
+                    <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                </v-list-tile-content>
+                
+            </v-list-tile>
+        </v-list>
+    </v-navigation-drawer>
 
         <v-toolbar
           color="blue darken-3"
@@ -83,6 +83,7 @@
             <v-fade-transition mode="out-in">
               <router-view></router-view>
             </v-fade-transition>
+            <BackToTop />
           </v-flex>
         </v-layout>
       </v-container>
@@ -98,6 +99,7 @@ import Footer from "@/components/Footer";
 import Snackbar from "@/components/Snackbar";
 import ProfileDialog from "@/components/ProfileDialog";
 import TeamDialog from "@/components/TeamDialog";
+import BackToTop from "@/components/BackTop";
 
 export default {
   name: "Home",
@@ -121,7 +123,8 @@ export default {
     Footer,
     Snackbar,
     ProfileDialog,
-    TeamDialog
+    TeamDialog,
+    BackToTop
   },
   methods: {
     navigationTo(link) {
