@@ -4,7 +4,7 @@
             <v-card>
                 <v-toolbar dark color="primary">
                     <v-tooltip bottom>
-                        <v-btn icon dark @click="onClose" slot="activator">
+                        <v-btn icon dark @click="onClose()" slot="activator">
                         <v-icon>close</v-icon>
                         </v-btn>
                         <span>Close</span>
@@ -12,7 +12,10 @@
                     <v-toolbar-title>Team</v-toolbar-title>
                     <v-spacer></v-spacer>
                     <v-toolbar-items>
-                        <v-btn dark flat @click="onSave" slot="activator">
+                        <v-btn flat @click="onRefresh()">
+                            <v-icon>refresh</v-icon>
+                        </v-btn>
+                        <v-btn dark flat @click="onSave()" slot="activator">
                             Save <v-icon right dark>save</v-icon>
                         </v-btn>
                     </v-toolbar-items>
@@ -60,6 +63,9 @@ export default {
         },
         onSave() {
             console.log("click on save");
+        },
+        onRefresh() {
+            console.log("refresh");
         }
     },
     computed: {

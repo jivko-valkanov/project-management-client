@@ -70,7 +70,7 @@
             </v-list>
         </v-menu>
         
-        <span>{{ getUsername }}</span>
+        <span style="font-size:1.5em">{{ getUsername }}</span>
     </v-toolbar>
 
     <v-content>

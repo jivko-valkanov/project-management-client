@@ -3,7 +3,7 @@ import App from './App.vue';
 import Vuetify from '@/plugins/vuetify';
 import router from '@/router/'
 import store from '@/store/';
-import { sync } from 'vuex-router-sync';
+//import { sync } from 'vuex-router-sync';
 
 Vue.use(Vuetify,{
   icons: {
@@ -12,7 +12,7 @@ Vue.use(Vuetify,{
 });
 Vue.config.productionTip = false
 
-sync(store, router);
+//sync(store, router);
 
 new Vue({
   router,
