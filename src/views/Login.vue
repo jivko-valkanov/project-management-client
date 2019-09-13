@@ -35,7 +35,6 @@
 </template>
 
 <script>
-import AuthenticationService from '@/services/AuthenticationService';
 import Footer from '@/components/Footer';
 import Snackbar from '@/components/Snackbar';
 
@@ -82,7 +81,7 @@ export default {
           this.doLogin();
         }
       },
-      resetForm() {            
+      resetForm() {
         this.$refs.loginForm.reset();
         this.payload.email = '',
         this.payload.password = '',
@@ -91,15 +90,9 @@ export default {
       },
       async doLogin() {
         if(this.$refs.loginForm.validate()) {
-          await AuthenticationService
-          .login(this.payload)
-          .then(response => {            
-            let data = response.data;
-            let token = data.token; 
-            let test = token.split('.');
-            let obj = JSON.parse(atob(test[1]));
-            this.$store.dispatch('user/setToken', data.token);
-            this.$store.dispatch('user/setUsername', obj.name);
+          await this.$store.dispatch("user/login", this.payload)
+          .then(() => {
+            this.resetForm();
             //redirect
             this.redirectTo({ path: 'home' });
           })

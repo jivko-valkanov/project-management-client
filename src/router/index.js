@@ -72,7 +72,7 @@ const router = new Router({
           meta: { requiresAuth: true }
         },
         {
-          path: 'user/add',
+          path: 'users/add',
           component: CreateUser,
           name: 'home.newUser',
           beforeEnter: AuthGuard,
@@ -80,7 +80,7 @@ const router = new Router({
           meta: { requiresAuth: true }
         },
         {
-          path: 'user/:id',
+          path: 'users/:id',
           component: UpdateUser,
           name: 'home.updateUser',
           beforeEnter: AuthGuard,

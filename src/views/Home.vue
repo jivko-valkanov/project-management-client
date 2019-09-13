@@ -94,7 +94,6 @@
 </template>
 
 <script>
-import AuthenticationService from '@/services/AuthenticationService';
 import Footer from "@/components/Footer";
 import Snackbar from "@/components/Snackbar";
 import ProfileDialog from "@/components/ProfileDialog";
@@ -130,31 +129,15 @@ export default {
     navigationTo(link) {
       this.$router.push(link)
     },
-    menuItemsClick(index) {
+    async menuItemsClick(index) {
       let option = this.items[index];
 
       if(option.title.toLowerCase() === "logout") {
-          AuthenticationService
-          .logout(null)
-          .then(response => {
-            console.log(response);
-          })
-          .catch(error => {
-            console.log(error.message);
-          })
+          await this.$store.dispatch("user/logout")
           .then(() => {
-            this.$store.dispatch('user/setToken', null);
-            this.$store.dispatch('user/setUsername', null);
             //redirect
             this.$router.push({ path: '/'});
           });
-          // .finally( function() {
-          //   self.$store.dispatch('setToken', null);
-          //   self.$store.dispatch('setUsername', null);
-          //   self.$store.dispatch('setIsLogin', false);
-          //   //redirect
-          //   self.$router.push({ path: '/'});
-          // });
       }
       else if(option.title.toLowerCase() === "profile") {
         this.$store.dispatch("openProfileDialog");
