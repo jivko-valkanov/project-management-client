@@ -1,5 +1,6 @@
 import axios from 'axios';
 import store from '@/store/';
+import router from '@/router';
 
 const instance = axios.create({
   baseURL: process.env.VUE_APP_SERVER_URL,
@@ -26,7 +27,8 @@ instance.interceptors.response.use(function(response) {
 
     if (401 === error.response.status) {
       //logout
-      //TODO
+      store.dispatch("user/logout");
+      router.push({path:'/'});
     } else if(403 === error.response.status) {
         store.dispatch('setSnackbarMessage', error.response.data.message);
     } else {
