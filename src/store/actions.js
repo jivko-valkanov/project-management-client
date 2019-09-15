@@ -1,3 +1,5 @@
+import UserService from '@/services/UserService';
+
 export default {
     setSnackbarStatus({commit}, payload) {
         commit("setSnackbarStatus", payload);
@@ -8,10 +10,33 @@ export default {
     clearSnackbar({commit}, payload) {
         commit("clearSnackbar", payload);
     },
-    openProfileDialog({commit}) {
-        commit("openProfileDialog");
+    async openProfileDialog({commit}) {
+
+        await UserService.getSelfDetails()
+          .then(response => {
+            commit("setProfileDetails",response.data);
+            commit("openProfileDialog");
+          })
+          .catch(error => {
+              console.log(error);
+              //commit error - TODO
+          });
     },
     closeProfileDialog({commit}) {
+        commit("clearProfileDetails");
         commit("closeProfileDialog");
+    },
+    changePassword({commit},payload) {
+        return new Promise((resolve, reject) => {
+            UserService.updateUserDetails(payload.id,payload.password)
+            .then(response => {
+                resolve(response);
+                commit("setSnackbarMessage", "Password has been updated.");
+            })
+            .catch(error => {
+                reject(error);
+                commit("setSnackbarMessage", "Password update error.");
+            });
+        });
     }
 }

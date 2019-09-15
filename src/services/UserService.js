@@ -9,5 +9,11 @@ export default {
     },
     getUserDetails(id) {
         return Api.get("/api/accounts/"+id);
+    },
+    getSelfDetails() {
+        return Api.get("/api/user");
+    },
+    updateUserDetails(id,payload) {
+        return Api.post("/api/accounts/"+id, payload);
     }
 };

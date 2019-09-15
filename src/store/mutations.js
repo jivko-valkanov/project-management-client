@@ -15,5 +15,11 @@ export default {
     },
     closeProfileDialog(state) {
         state.profileDialog = false;
+    },
+    setProfileDetails(state, payload) {
+        state.profileDetails = payload;
+    },
+    clearProfileDetails(state) {
+        state.profileDetails = {};
     }
 }

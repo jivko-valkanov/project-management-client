@@ -7,5 +7,8 @@ export default {
     },
     getProfileDialog(state) {
         return state.profileDialog;
+    },
+    getProfileDetails(state) {
+        return state.profileDetails;
     }
 }
