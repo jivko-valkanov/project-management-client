@@ -112,7 +112,7 @@ export default {
         { title: "Team", icon:"group", link: {name: "home.team"}},
         { title: "Users", icon:"people", link: {name: "home.users"}},
       ],
-      drawer: true
+      drawer: null
     }
   },
   created() {

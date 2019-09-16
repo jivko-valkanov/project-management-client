@@ -16,9 +16,9 @@ Vue.use(Vuex)
 const vuexLocalStorage = new VuexPersist({
   key: 'application-store',
   storage: window.localStorage,
-  // reducer: state => ([
-  //   state.user
-  // ])
+  //restoreState: (key, storage) => Cookies.getJSON(key),
+  //reducer: state => state.user
+  modules: ['user']
 });
 
 const rootStore =  new Vuex.Store({

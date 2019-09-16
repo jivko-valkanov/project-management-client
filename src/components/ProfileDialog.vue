@@ -136,12 +136,14 @@ export default {
           this.$refs.passwordForm.reset();
         },
         async onChange() {
-          await this.$store.dispatch('changePassword',{id:this.profileDetails.id,password:this.password})
-          .then(() => {
-            this.onClear();
-          }).catch(() => {
-            this.onClear();
-          });
+          if(this.$refs.passwordForm.validate()) {
+            await this.$store.dispatch('changePassword',{id:this.profileDetails.id, password:this.password})
+            .then(() => {
+              this.onClear();
+            }).catch(() => {
+              this.onClear();
+            });
+          }
         }
     },
     computed: {
