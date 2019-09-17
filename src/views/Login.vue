@@ -9,14 +9,28 @@
             </v-toolbar>
             <v-card-text>
               <v-form ref="loginForm">
-                <v-text-field prepend-icon="person" name="email" 
-                label="Email" type="email" autocomplete="off"
-                id="email" required :rules="emailRules" 
+                <v-text-field 
+                prepend-icon="person" 
+                name="email" 
+                label="Email" 
+                type="email" 
+                autocomplete="off"
+                id="email" 
+                required 
+                :rules="emailRules" 
                 v-model=payload.email></v-text-field>
 
-                <v-text-field prepend-icon="lock" name="password" 
-                label="Password" type="password" autocomplete="off"
-                id="password" required :rules="passwordRules" 
+                <v-text-field 
+                prepend-icon="lock" 
+                name="password" 
+                label="Password" 
+                :type="passwordIsVisible ? 'text' : 'password'"
+                autocomplete="off"
+                id="password" 
+                required
+                :append-icon="passwordIsVisible ? 'visibility':'visibility_off'"
+                @click:append="() => (passwordIsVisible = !passwordIsVisible)" 
+                :rules="passwordRules" 
                 v-model=payload.password></v-text-field>
               </v-form>
             </v-card-text>
@@ -66,7 +80,8 @@ export default {
               v => !!v || 'Password is required'
             ],
             valid: "false",
-            show: false
+            show: false,
+            passwordIsVisible: false
         }
     },
     mounted() {

@@ -137,11 +137,11 @@ export default {
         },
         async onChange() {
           if(this.$refs.passwordForm.validate()) {
-            await this.$store.dispatch('changePassword',{id:this.profileDetails.id, password:this.password})
+            await this.$store.dispatch('changePassword',this.password)
             .then(() => {
               this.onClear();
             }).catch(() => {
-              this.onClear();
+              //this.onClear();
             });
           }
         }

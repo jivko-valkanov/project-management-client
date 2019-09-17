@@ -28,14 +28,14 @@ export default {
     },
     changePassword({commit},payload) {
         return new Promise((resolve, reject) => {
-            UserService.updateUserDetails(payload.id,payload.password)
+            UserService.updateUserDetails(payload)
             .then(response => {
                 resolve(response);
                 commit("setSnackbarMessage", "Password has been updated.");
             })
             .catch(error => {
                 reject(error);
-                commit("setSnackbarMessage", "Password update error.");
+                commit("setSnackbarMessage", error.response.data.error);
             });
         });
     }

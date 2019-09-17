@@ -13,7 +13,7 @@ export default {
     getSelfDetails() {
         return Api.get("/api/user");
     },
-    updateUserDetails(id,payload) {
-        return Api.post("/api/accounts/"+id, payload);
+    updateUserDetails(payload) {
+        return Api.post("/api/accounts/change-password", payload);
     }
 };

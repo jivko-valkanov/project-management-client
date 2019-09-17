@@ -2,19 +2,10 @@
     <div>
         <v-subheader> {{ header }} </v-subheader>
         <v-divider></v-divider>
-        <v-layout>
-            <v-flex xs12 md12>
-                <v-container
-                fluid
-                grid-list-md
-                >
-                <v-layout wrap>
-                    <v-flex
-                    v-for="card in cards"
-                    :key="card.title"
-                    v-bind="{ [`xs${card.flex}`]: true }"
-                    >
-                    <v-card 
+        <v-container fluid>
+            <v-layout row wrap>
+                <v-flex xs12 sm6 md3 order-md4 order-sm2 pa-1 v-for="card in cards" :key="card.title">
+                    <v-card
                         :color="`${card.color}`"
                     >
                         <v-container
@@ -43,11 +34,9 @@
                             <v-btn class="ma-2" outlined >Action</v-btn>
                         </v-card-actions>
                     </v-card>
-                    </v-flex>
-                </v-layout>
-                </v-container>
-            </v-flex>
-        </v-layout>
+                </v-flex>
+            </v-layout>
+        </v-container>
     </div>
 </template>
 
