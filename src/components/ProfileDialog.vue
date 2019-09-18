@@ -97,7 +97,7 @@
           <v-btn
             class="black--text"
             flat
-            @click="closeDialog"
+            @click="closeDialog()"
           >
             Close
           </v-btn>
@@ -127,7 +127,8 @@ export default {
     },
     methods: {
         closeDialog() {
-            this.$store.dispatch('closeProfileDialog');
+          this.onClear();
+          this.$store.dispatch('closeProfileDialog');
         },
         onClear() {
           this.password.old = ''

@@ -129,6 +129,14 @@ export default {
       redirectTo(path) {
         this.$router.push(path);
       }
+    },
+    computed: {
+      rules() {
+        return {
+          email: [],
+          password: []
+        };     
+      }
     }
 }
 </script>
