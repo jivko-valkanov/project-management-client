@@ -10,6 +10,7 @@ import actions from './actions';
 import user from './modules/user';
 import notification from './modules/notification';
 import team from './modules/team';
+import project from './modules/project';
 
 Vue.use(Vuex)
 
@@ -25,7 +26,8 @@ const rootStore =  new Vuex.Store({
   modules: {
     user:user,
     notification:notification,
-    team: team
+    team: team,
+    project: project
   },
   plugins: [vuexLocalStorage.plugin],
   strict: process.env.NODE_ENV !== 'production',

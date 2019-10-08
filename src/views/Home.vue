@@ -47,7 +47,7 @@
         <v-badge overlap left>
             <span slot="badge">0</span>
             <v-tooltip bottom>
-                <v-btn icon slot="activator">
+                <v-btn icon slot="activator" @click="navigationTo({name:'home.notifications'})">
                   <v-icon>notifications</v-icon>
                 </v-btn>
                 <span>Notifications</span>
@@ -80,6 +80,7 @@
             <Snackbar/>
             <ProfileDialog />
             <TeamDialog />
+            <ProjectDialog />
             <v-fade-transition mode="out-in">
               <router-view></router-view>
             </v-fade-transition>
@@ -98,6 +99,7 @@ import Footer from "@/components/Footer";
 import Snackbar from "@/components/Snackbar";
 import ProfileDialog from "@/components/ProfileDialog";
 import TeamDialog from "@/components/TeamDialog";
+import ProjectDialog from "@/components/ProjectDialog";
 import BackToTop from "@/components/BackTop";
 
 export default {
@@ -123,6 +125,7 @@ export default {
     Snackbar,
     ProfileDialog,
     TeamDialog,
+    ProjectDialog,
     BackToTop
   },
   methods: {
@@ -133,11 +136,13 @@ export default {
       let option = this.items[index];
 
       if(option.title.toLowerCase() === "logout") {
+        if(confirm("Are you sure ?")) {
           await this.$store.dispatch("user/logout")
           .then(() => {
             //redirect
             this.$router.push({ path: '/'});
           });
+        }
       }
       else if(option.title.toLowerCase() === "profile") {
         this.$store.dispatch("openProfileDialog");

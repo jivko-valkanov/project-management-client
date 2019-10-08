@@ -3,7 +3,6 @@
       <v-layout align-center justify-center>
         <v-flex xs12 sm8 md4>
           <Snackbar />
-          <FileUpload/>
           <v-card class="elevation-2">
             <v-toolbar dark color="primary">
               <v-toolbar-title>Login</v-toolbar-title>
@@ -52,14 +51,12 @@
 <script>
 import Footer from '@/components/Footer';
 import Snackbar from '@/components/Snackbar';
-import FileUpload from '@/components/FileUpload';
 
 export default {
     name: "Login",
     components: {
       Footer,
-      Snackbar,
-      FileUpload
+      Snackbar
     },
     created() {
       document.title = "Login";

@@ -9,6 +9,7 @@ import Team from '@/views/home/Team';
 import Users from '@/views/home/Users';
 import CreateUser from '@/views/user/CreateUser';
 import UpdateUser from '@/views/user/UpdateUser';
+import Notifications from '@/views/home/Notifications';
 import NotFound from '@/views/404';
 
 Vue.use(Router)
@@ -83,6 +84,14 @@ const router = new Router({
           path: 'users/:id',
           component: UpdateUser,
           name: 'home.updateUser',
+          beforeEnter: AuthGuard,
+          // a meta field
+          meta: { requiresAuth: true }
+        },
+        {
+          path: 'notifications',
+          component: Notifications,
+          name: 'home.notifications',
           beforeEnter: AuthGuard,
           // a meta field
           meta: { requiresAuth: true }
