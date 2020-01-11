@@ -80,7 +80,6 @@
             <Snackbar/>
             <ProfileDialog />
             <TeamDialog />
-            <ProjectDialog />
             <v-fade-transition mode="out-in">
               <router-view></router-view>
             </v-fade-transition>
@@ -99,7 +98,6 @@ import Footer from "@/components/Footer";
 import Snackbar from "@/components/Snackbar";
 import ProfileDialog from "@/components/ProfileDialog";
 import TeamDialog from "@/components/TeamDialog";
-import ProjectDialog from "@/components/ProjectDialog";
 import BackToTop from "@/components/BackTop";
 
 export default {
@@ -112,7 +110,7 @@ export default {
         { title: "Dashboard", icon:"dashboard", link: {name: "home.dashboard"}},
         { title: "Projects", icon:"view_module", link: {name: "home.projects"}},
         { title: "Team", icon:"group", link: {name: "home.team"}},
-        { title: "Users", icon:"people", link: {name: "home.users"}},
+        { title: "Members", icon:"people", link: {name: "home.users"}},
       ],
       drawer: null
     }
@@ -125,7 +123,6 @@ export default {
     Snackbar,
     ProfileDialog,
     TeamDialog,
-    ProjectDialog,
     BackToTop
   },
   methods: {

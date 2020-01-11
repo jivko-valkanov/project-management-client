@@ -18,19 +18,27 @@
                     <td>{{ props.item.id }}</td>
                     <td>{{ props.item.title }}</td>
                     <td>{{ props.item.owner }}</td>
-                    <td>{{ props.item.status.name }}</td>
+                    <td>{{ props.item.stage.name }}</td>
                 </template>
 
-            </v-data-table>
+        </v-data-table>
+        <ProjectDialog 
+            v-bind:title="projectProperties.title"
+            v-bind:description="projectProperties.description"
+            v-bind:deadline="projectProperties.deadline"
+        />
     </div>
 </template>
 
 <script>
 import ProjectService from '@/services/ProjectService';
+import ProjectDialog from "@/components/ProjectDialog";
 
 export default {
     name: "Dashboard",
-
+    components:{
+        ProjectDialog
+    },
     data() {
         return {
             header: "Projects",
@@ -46,7 +54,12 @@ export default {
                 { text: 'Title', align: 'left', sortable: true, value: 'title' },
                 { text: 'Owner', align: 'left', sortable: true, value: 'owner' },
                 { text: 'Status', align: 'left', sortable: true, value: 'name' }
-            ]
+            ],
+            projectProperties: {
+                title:null,
+                description:null,
+                deadline:new Date().toISOString().substr(0, 10)
+            }
         }
     },
     created() {
@@ -79,7 +92,7 @@ export default {
 </script>
 
 <style scoped>
-.v-subheader {
-    font-size: 28px;
-}
+    .v-subheader {
+        font-size: 28px;
+    }
 </style>

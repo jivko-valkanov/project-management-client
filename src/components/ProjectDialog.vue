@@ -23,25 +23,66 @@
                 <!-- container -->
                 <div grid-list-md text-xs-center>
                     <v-layout row wrap>
-                        <v-flex xs12 lg5 pa-3>
+                        <v-flex xs12 lg6 pa-3>
                             <v-card>
                                 <v-card-text class="primary white--text">
-                                    <h4 style="text-transform:uppercase;">{{ title }}</h4>
+                                    <h4 style="text-transform:uppercase;">{{ basicInfo }}</h4>
                                 </v-card-text>
                                 <v-card-text class="details-container">
-                                <v-layout row wrap>
-                                   
-                                </v-layout>
+                                    <v-layout column>
+                                        <v-flex>
+                                            <v-text-field
+                                            label="Title"
+                                            prepend-icon="title" 
+                                            v-model="localTitle"
+                                            ></v-text-field>
+                                        </v-flex>
+                                        <v-flex>
+                                            <v-textarea
+                                            label="Description"
+                                            prepend-icon="description"
+                                            v-model="localDescription"
+                                            ></v-textarea>
+                                        </v-flex>
+                                        <v-flex>
+                                            <v-menu
+                                                v-model="menu"
+                                                :close-on-content-click="false"
+                                                :nudge-right="40"
+                                                lazy
+                                                transition="scale-transition"
+                                                offset-y
+                                                full-width
+                                                min-width="290px"
+                                            >
+                                                <template v-slot:activator="{ on }">
+                                                    <v-text-field
+                                                        v-model="localDeadline"
+                                                        label="Deadline"
+                                                        prepend-icon="event"
+                                                        readonly
+                                                        v-on="on"
+                                                    ></v-text-field>
+                                                </template>
+                                                <v-date-picker v-model="localDeadline" @input="menu = false"></v-date-picker>
+                                            </v-menu> 
+                                        </v-flex>
+                                    </v-layout>
                                 </v-card-text>
                             </v-card>
                         </v-flex>
-                        <!-- <v-flex xs12 lg7 pa-3>
-                            <v-card class="children-tabs">
-                            <v-tabs color="primary" dark slider-color="primary">
-                                <slot>{{ history }}</slot>
-                            </v-tabs>
+                        <v-flex xs12 lg6 pa-3>
+                            <v-card>
+                                <v-card-text class="primary white--text">
+                                        <h4 style="text-transform:uppercase;">{{ history }}</h4>
+                                    </v-card-text>
+                                    <v-card-text class="details-container">
+                                    <v-layout column>
+                                        
+                                    </v-layout>
+                                </v-card-text>
                             </v-card>
-                        </v-flex> -->
+                        </v-flex>
                     </v-layout>
                 </div>
             </v-card>
@@ -52,21 +93,56 @@
 <script>
 export default {
     name:'ProjectDialog',
+    props:{
+        title:{
+            type:String,
+            default:null
+        },
+        description: {
+            type:String,
+            default:null
+        },
+        deadline:{
+            type:String,
+            default: function() {
+                return new Date().toISOString().substr(0, 10);
+            }
+        }
+    },
     data() {
         return {
-            title: "basic information",
-            history: "history"
+            basicInfo: "basic information",
+            history: "history",
+            menu: false,
+            localTitle:this.title,
+            localDescription:this.description,
+            localDeadline:this.deadline
         }
+    },
+    created() {
+        console.log("onCreated");
+    },
+    mounted() {
+        console.log("onMounted");
+    },
+    destroyed() {
+        console.log("onDestroyed");
     },
     methods: {
         onSave() {
             this.$store.dispatch('project/closeDialog');
         },
         onClose() {
+            this.clearData();
             this.$store.dispatch('project/closeDialog');
         },
         onRefresh() {
             //TODO
+        },
+        clearData() {
+            this.localTitle = null;
+            this.localDescription = null;
+            this.localDeadline = new Date().toISOString().substr(0, 10);
         }
     },
     computed: {

@@ -1,7 +1,7 @@
 import store from '@/store/';
 
 const guard = (to, from, next) => {
-  // check if authenticated by jwt from store or localstorage
+  //check if authenticated by jwt from store or localstorage
   if(to.matched.some(record => record.meta.requiresAuth)) {
     if (!store.getters['user/checkIsLogin']) {
       next({
@@ -14,6 +14,7 @@ const guard = (to, from, next) => {
   } else {
     next();
   }
+  //next()
 };
 
 export default guard;
