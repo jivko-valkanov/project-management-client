@@ -152,7 +152,7 @@ export default {
         }
     },
     created() {
-        document.title = "Users"
+        document.title = "Members"
     },
     beforeMount() {
     },

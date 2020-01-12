@@ -20,6 +20,8 @@ export default {
           .catch(error => {
               console.log(error);
               //commit error - TODO
+          }).finally(() => {
+            commit("openProfileDialog");
           });
     },
     closeProfileDialog({commit}) {

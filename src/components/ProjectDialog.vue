@@ -34,14 +34,16 @@
                                             <v-text-field
                                             label="Title"
                                             prepend-icon="title" 
-                                            v-model="localTitle"
+                                            v-model="title"
+                                            :readonly="isEditData"
                                             ></v-text-field>
                                         </v-flex>
                                         <v-flex>
                                             <v-textarea
                                             label="Description"
                                             prepend-icon="description"
-                                            v-model="localDescription"
+                                            v-model="description"
+                                            :readonly="isEditData"
                                             ></v-textarea>
                                         </v-flex>
                                         <v-flex>
@@ -57,14 +59,14 @@
                                             >
                                                 <template v-slot:activator="{ on }">
                                                     <v-text-field
-                                                        v-model="localDeadline"
+                                                        v-model="deadline"
                                                         label="Deadline"
                                                         prepend-icon="event"
                                                         readonly
                                                         v-on="on"
                                                     ></v-text-field>
                                                 </template>
-                                                <v-date-picker v-model="localDeadline" @input="menu = false"></v-date-picker>
+                                                <v-date-picker v-model="deadline" @input="menu = false"></v-date-picker>
                                             </v-menu> 
                                         </v-flex>
                                     </v-layout>
@@ -93,30 +95,11 @@
 <script>
 export default {
     name:'ProjectDialog',
-    props:{
-        title:{
-            type:String,
-            default:null
-        },
-        description: {
-            type:String,
-            default:null
-        },
-        deadline:{
-            type:String,
-            default: function() {
-                return new Date().toISOString().substr(0, 10);
-            }
-        }
-    },
     data() {
         return {
             basicInfo: "basic information",
             history: "history",
             menu: false,
-            localTitle:this.title,
-            localDescription:this.description,
-            localDeadline:this.deadline
         }
     },
     created() {
@@ -133,21 +116,43 @@ export default {
             this.$store.dispatch('project/closeDialog');
         },
         onClose() {
-            this.clearData();
+            this.$store.dispatch('project/cleanCurrentProjectData');
             this.$store.dispatch('project/closeDialog');
         },
         onRefresh() {
             //TODO
         },
-        clearData() {
-            this.localTitle = null;
-            this.localDescription = null;
-            this.localDeadline = new Date().toISOString().substr(0, 10);
-        }
     },
     computed: {
         getDialogStatus() {
             return this.$store.getters['project/getDialogStatus'];
+        },
+        title: {
+            get() {
+                return this.$store.getters['project/getCurrentProjectTitle'];
+            },
+            set(value) {
+                this.$store.dispatch('project/setProjectTitle', value);
+            }
+        },
+        description: {
+            get() {
+                return this.$store.getters['project/getCurrentProjectDescription'];
+            },
+            set(value) {
+                this.$store.dispatch('project/setProjectDescription', value);
+            }
+        },
+        deadline: {
+            get() {
+                return this.$store.getters['project/getCurrentProjectDeadline'];
+            },
+            set(value) {
+                this.$store.dispatch('project/setProjectDeadline', value);
+            }
+        },
+        isEditData() {
+            return this.$store.getters['project/getCurrentProjectId'] > 0 ? true : false;
         }
     }
 }

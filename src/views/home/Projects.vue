@@ -22,11 +22,7 @@
                 </template>
 
         </v-data-table>
-        <ProjectDialog 
-            v-bind:title="projectProperties.title"
-            v-bind:description="projectProperties.description"
-            v-bind:deadline="projectProperties.deadline"
-        />
+        <ProjectDialog />
     </div>
 </template>
 
@@ -54,12 +50,7 @@ export default {
                 { text: 'Title', align: 'left', sortable: true, value: 'title' },
                 { text: 'Owner', align: 'left', sortable: true, value: 'owner' },
                 { text: 'Status', align: 'left', sortable: true, value: 'name' }
-            ],
-            projectProperties: {
-                title:null,
-                description:null,
-                deadline:new Date().toISOString().substr(0, 10)
-            }
+            ]
         }
     },
     created() {

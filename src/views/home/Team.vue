@@ -31,15 +31,19 @@
                 </tr>
             </template>
         </v-data-table>
+        <TeamDialog />
     </div>
 </template>
 
 <script>
 import TeamService from '@/services/TeamService';
+import TeamDialog from "@/components/TeamDialog";
 
 export default {
     name: "Dashboard",
-
+    components: {
+        TeamDialog
+    },
     data() {
         return {
             header: "Team",
